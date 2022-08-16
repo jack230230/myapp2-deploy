@@ -1,27 +1,27 @@
 myapp2-backend:
   env:
-  - name: HOST
-    value: h8r.dev
-  - name: ENV_NAME
-    value: main-env
+    - name: HOST
+      value: h8r.dev
+    - name: ENV_NAME
+      value: main-env
   fullnameOverride: myapp2-backend
   image:
     repository: ghcr.io/jack230230/myapp2-backend
     tag: main
   imagePullSecrets:
-  - name: myapp2-docker
+    - name: myapp2-docker
   ingress:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /$2
     className: nginx
     enabled: true
     hosts:
-    - host: myapp2.h8r.site
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-      - path: /v2/api(/|$)(.*)
-        pathType: ImplementationSpecific
+      - host: myapp2.h8r.site
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+          - path: /v2/api(/|$)(.*)
+            pathType: ImplementationSpecific
   nocalhost:
     command:
       debug: ./gradlew bootrun --debug-jvm
@@ -33,33 +33,33 @@ myapp2-backend:
     image: ghcr.io/jack230230/myapp2-backend
     language: java
     persistentVolumeDirs:
-    - capacity: 20Gi
-      path: /home/nocalhost-dev
-    - capacity: 20Gi
-      path: /root/.m2
+      - capacity: 20Gi
+        path: /home/nocalhost-dev
+      - capacity: 20Gi
+        path: /root/.m2
     remoteDebugPort: 9009
   service:
     targetPort: 8080
 myapp2-frontend:
   env:
-  - name: HOST
-    value: h8r.dev
-  - name: ENV_NAME
-    value: main-env
+    - name: HOST
+      value: h8r.dev
+    - name: ENV_NAME
+      value: main-env
   fullnameOverride: myapp2-frontend
   image:
     repository: ghcr.io/jack230230/myapp2-py
     tag: main
   imagePullSecrets:
-  - name: myapp2-docker
+    - name: myapp2-docker
   ingress:
     className: nginx
     enabled: true
     hosts:
-    - host: myapp2.h8r.site
-      paths:
-      - path: /
-        pathType: ImplementationSpecific
+      - host: myapp2.h8r.site
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
   nocalhost:
     command:
       debug: NH_PLUGIN=VSCode ./debug.sh
@@ -71,8 +71,11 @@ myapp2-frontend:
     image: ghcr.io/jack230230/myapp2-py
     language: python
     persistentVolumeDirs:
-    - capacity: 20Gi
-      path: /home/nocalhost-dev
+      - capacity: 20Gi
+        path: /home/nocalhost-dev
     remoteDebugPort: 9009
   service:
     targetPort: 5000
+myapp2-py:
+  image:
+    tag: fa28fdd
