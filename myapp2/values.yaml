@@ -7,7 +7,7 @@ myapp2-backend:
   fullnameOverride: myapp2-backend
   image:
     repository: ghcr.io/jack230230/myapp2-backend
-    tag: main
+    tag: f1323c8
   imagePullSecrets:
     - name: myapp2-docker
   ingress:
